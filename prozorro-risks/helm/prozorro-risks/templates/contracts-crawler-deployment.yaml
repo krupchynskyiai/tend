@@ -1,0 +1,58 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "prozorro.risks.fullname" . }}-contracts-crawler
+  labels:
+{{ include "prozorro.risks.labels" . | indent 4 }}
+spec:
+  replicas: {{ .Values.contracts_crawler.replicaCount }}
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: {{ include "prozorro.risks.name" . }}-contracts-crawler
+      app.kubernetes.io/instance: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: {{ include "prozorro.risks.name" . }}-contracts-crawler
+        app.kubernetes.io/instance: {{ .Release.Name }}
+    spec:
+    {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+      containers:
+        - name: {{ .Chart.Name }}-contracts-crawler
+          image: "{{ .Values.contracts_crawler.image.repository }}:{{ .Values.contracts_crawler.image.tag }}"
+          imagePullPolicy: {{ .Values.contracts_crawler.image.pullPolicy }}
+          command: ["python", "-m", "prozorro.risks.crawlers.contracts_crawler"]
+          env:
+            - name: MONGODB_URL
+              value: '{{ .Values.MONGODB_URL }}'
+            - name: PUBLIC_API_HOST
+              value: '{{ .Values.PUBLIC_API_HOST }}'
+            - name: MONGODB_STATE_ID
+              value: 'prozorro-contracts-risks'
+            - name: BACKWARD_OFFSET
+              value: '{{ .Values.BACKWARD_OFFSET }}'
+            - name: FORWARD_OFFSET
+              value: '{{ .Values.FORWARD_OFFSET }}'
+            - name: FORWARD_CHANGES_COOLDOWN_SECONDS
+              value: '{{ .Values.FORWARD_CHANGES_COOLDOWN_SECONDS }}'
+            - name: API_RESOURCE
+              value: 'contracts'
+            - name: LOCK_PROCESS_NAME
+              value: 'contracts_crawler_lock'
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+    {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+    {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}

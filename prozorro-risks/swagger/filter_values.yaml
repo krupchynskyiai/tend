@@ -1,0 +1,41 @@
+tags:
+- Helpers
+description: Get filter values with list of unique regions and risk rules
+operationId: get_filter_values
+produces:
+- application/json
+responses:
+  "200":
+    description: successful operation
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            regions:
+              type: array
+              items:
+                type: string
+                description: Region name
+            risk_rules:
+              type: array
+              items:
+                type: object
+                description: Risk rules
+                properties:
+                  identifier:
+                    type: string
+                    description: Risk identifier
+                    example: 3-1
+                  start_date:
+                    type: string
+                    format: date-time
+                    description: Date when assessment started for risk
+                  end_date:
+                    type: string
+                    format: date-time
+                    description: Date when assessment ended for risk (archive)
+                  status:
+                    type: string
+                    example: active
+                    description: Risk status (archived/active)

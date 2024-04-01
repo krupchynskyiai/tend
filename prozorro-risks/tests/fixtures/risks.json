@@ -1,0 +1,49 @@
+{
+  "dateModified": "2023-02-14T21:37:16.832566+02:00",
+  "dateAssessed": "2023-02-14T21:37:16.832566+02:00",
+  "procuringEntity": {
+    "contactPoint": {
+      "telephone": "+380532563845",
+      "faxNumber": "+380532563845",
+      "name": "Тимчук Олександр Валеріович",
+      "email": "tymchuk@pei.poltava.ua"
+    },
+    "identifier": {
+      "scheme": "UA-EDR",
+      "id": "22518134",
+      "legalName": "Полтавський обласний інститут післядипломної педагогічної освіти ім.М.В. Остроградського"
+    },
+    "name": "Полтавський обласний інститут післядипломної педагогічної освіти ім.М.В. Остроградського",
+    "kind": "general",
+    "address": {
+      "postalCode": "36029",
+      "countryName": "Україна",
+      "streetAddress": "вул Жовтнева 64 Ж",
+      "region": "Полтавська область",
+      "locality": "м Полтава"
+    }
+  },
+  "procuringEntityRegion": "Полтавська область",
+  "procuringEntityEDRPOU": "22518134",
+  "risks": {
+    "sas-3-1": [{
+      "indicator": "risk_found",
+      "date": "2023-03-13T14:37:12.491341+02:00"
+    }],
+    "sas-3-2": [{
+      "indicator": "risk_found",
+      "date": "2023-03-13T14:37:12.491365+02:00"
+    }],
+    "sas-3-2-1": [{
+      "indicator": "risk_not_found",
+      "date": "2023-03-13T14:37:12.491385+02:00"
+    }]
+  },
+  "worked_risks": ["sas-3-1", "sas-3-2"],
+  "value": {
+    "currency": "UAH",
+    "amount": 10760.54,
+    "valueAddedTaxIncluded": false
+  },
+  "tenderID": "UA-2023-02-16-009364-a"
+}

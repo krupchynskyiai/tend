@@ -1,7 +1,7 @@
 from prozorro.risks.models import RiskFound, RiskNotFound
 from prozorro.risks.rules.base import BaseTenderRiskRule
 
-class RiskRuleNew(BaseTenderRiskRule):
+class RiskRule(BaseTenderRiskRule):
     identifier = "sas-1-1"
     name = "Використання переговорної процедури закупівлі за відсутності законодавчих підстав (двічі відмінені процедури відкритих торгів)"
     description = (
